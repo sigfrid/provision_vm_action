@@ -1,0 +1,7 @@
+#! /bin/bash
+
+echo "Setting up the timezone ..."
+
+sudo rm /etc/localtime
+sudo ln -s /usr/share/zoneinfo/<%= ENV["TIMEZONE"] %> /etc/localtime
+sudo timedatectl set-timezone <%= ENV["TIMEZONE"] %>
