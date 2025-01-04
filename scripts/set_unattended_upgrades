@@ -1,0 +1,9 @@
+#! /bin/bash
+
+echo "Setting up unattended upgrades ..."
+echo "Debian 12 install security updates automatically"
+
+# Unattended-Upgrade::Origins-Pattern {
+#   "origin=Debian,codename=${distro_codename},label=Debian-Security";
+#   "origin=Debian,codename=${distro_codename}-security,label=Debian-Security";
+# };
