@@ -1,0 +1,27 @@
+#! /bin/bash
+
+echo "Installing Fail2Ban ..."
+
+# If someone tries to login 7 times within 10 minutes with incorrect credentials
+# their IP address will be blocked for 7 days.
+# To see the logs sudo fail2ban-client status sshd.
+sudo apt install fail2ban -y
+sudo touch /etc/fail2ban/fail2ban.local
+echo '[DEFAULT]' | sudo tee -a /etc/fail2ban/fail2ban.local
+echo 'allowipv6 = yes' | sudo tee -a /etc/fail2ban/fail2ban.local
+sudo touch /etc/fail2ban/jail.local
+echo '[DEFAULT]' | sudo tee -a /etc/fail2ban/jail.local
+echo 'backend = systemd' | sudo tee -a /etc/fail2ban/jail.local
+echo 'bantime = 2592000' | sudo tee -a /etc/fail2ban/jail.local
+echo 'findtime = 600' | sudo tee -a /etc/fail2ban/jail.local
+echo 'maxretry = 10' | sudo tee -a /etc/fail2ban/jail.local
+echo '' | sudo tee -a /etc/fail2ban/jail.local
+echo '[sshd]' | sudo tee -a /etc/fail2ban/jail.local
+echo 'enabled = true' | sudo tee -a /etc/fail2ban/jail.local
+echo 'port = 22,38291' | sudo tee -a /etc/fail2ban/jail.local
+echo 'bantime = 604800' | sudo tee -a /etc/fail2ban/jail.local
+echo 'maxretry = 7' | sudo tee -a /etc/fail2ban/jail.local
+echo 'filter = sshd[mode=aggressive]' | sudo tee -a /etc/fail2ban/jail.local
+echo 'ignoreip = 127.0.0.1/8 ::1/128 192.168.0.0/16 10.0.0.0/8 172.16.0.0/12 169.254.0.0/16' | sudo tee -a /etc/fail2ban/jail.local
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
