@@ -1,0 +1,14 @@
+#! /bin/bash
+
+echo "Hardening the SSH config ..."
+
+sudo sed -i "s|Include /etc/ssh/sshd_config.d/\*.conf|#\0|" /etc/ssh/sshd_config
+sudo sed -i 's|^#Port 22$|Port <%= ENV["SSH_PORT"] %>|' /etc/ssh/sshd_config
+echo "Remember to open the port on the firewall !!!"
+sudo sed -i 's|^#PasswordAuthentication yes$|PasswordAuthentication no|' /etc/ssh/sshd_config
+sudo sed -i 's|^#PubkeyAuthentication yes$|PubkeyAuthentication yes|' /etc/ssh/sshd_config
+sudo sed -i 's|^#PermitRootLogin prohibit-password$|PermitRootLogin no|' /etc/ssh/sshd_config
+sudo sed -i 's|^#AllowAgentForwarding yes$|AllowAgentForwarding no|' /etc/ssh/sshd_config
+sudo sed -i 's|^#AllowTcpForwarding yes$|AllowTcpForwarding no|' /etc/ssh/sshd_config
+sudo sed -i 's|^X11Forwarding yes|X11Forwarding no|' /etc/ssh/sshd_config
+sudo systemctl restart ssh
