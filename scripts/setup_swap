@@ -1,0 +1,14 @@
+#! /bin/bash
+
+echo "Setting up and enabling the swapfile ..."
+
+sudo touch /swapfile
+sudo fallocate -l <%= ENV["SWAP_FILE_SIZE"] || "1G" %> /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+sudo sysctl vm.swappiness=<%= ENV["SWAPPINESS_MAGNITUDE"] || "10" %>
+echo 'vm.swappiness=<%= ENV["SWAPPINESS_MAGNITUDE"] || "10" %>' | sudo tee -a /etc/sysctl.conf
+sudo sysctl vm.vfs_cache_pressure=<%= ENV["CACHE_PRESSURE_MAGNITUDE"] || "50" %>
+echo 'vm.vfs_cache_pressure=<%= ENV["CACHE_PRESSURE_MAGNITUDE"] || "50" %>' | sudo tee -a /etc/sysctl.conf
