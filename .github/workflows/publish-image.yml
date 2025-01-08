@@ -48,6 +48,6 @@ jobs:
       - name: Clean up old package versions
         uses: actions/delete-package-versions@v5
         with:
-          package-name: 'provisioning_scripts'
-          package-type: 'container'
+          package-name: provisining_scripts
+          package-type: container
           min-versions-to-keep: 1
