@@ -37,8 +37,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{  github.repository }}:${{ env.GITHUB_REF:10 }}
-            ghcr.io/${{  github.repository }}:${{ env.GITHUB_REF:10 }}
+            ${{  github.repository }}:${{ github.ref_name }}
+            ghcr.io/${{  github.repository }}:${{ github.ref_name }}
 
 
 #RELEASE_TAG=${GITHUB_REF:10}
