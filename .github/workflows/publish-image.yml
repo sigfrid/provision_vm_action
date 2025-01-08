@@ -46,6 +46,11 @@ jobs:
           tags: |
             ghcr.io/${{  github.repository }}:${{ github.ref_name }}
 
+      - name: Echo
+        run: |
+          echo "Digest: ${{ steps.push.outputs.digest }}"
+          echo "Image: ${{ steps.push.outputs.image }}"
+
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
