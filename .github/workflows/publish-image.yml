@@ -4,11 +4,6 @@ on:
   release:
     types: [published]
 
-#on:
-#  push:
-#    branches:
-#      - "test-package-action"
-
 jobs:
   build:
     # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md
