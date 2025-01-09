@@ -62,3 +62,18 @@ jobs:
           package-name: ${{ github.event.repository.name }}
           package-type: container
           min-versions-to-keep: 1
+
+  notify:
+    # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md
+    runs-on: ubuntu-24.04
+
+    env:
+      TEXT: "New image published: ghcr.io/${{  github.repository }}:${{ github.ref_name }}"
+
+    needs: [build]
+
+    if: success()
+    steps:
+      - name: Post to MS Teams
+        run: |
+          curl -H 'Content-Type: application/json' -d '{"text":"${{env.TEXT}}"}' ${{ secrets.MS_TEAMS_URL }}
