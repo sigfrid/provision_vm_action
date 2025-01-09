@@ -54,6 +54,9 @@ jobs:
     permissions:
       packages: write
 
+    env:
+      VERSIONS_TO_KEEP: 1
+
     if: success()
     steps:
       - name: Clean up old package versions
@@ -61,7 +64,7 @@ jobs:
         with:
           package-name: ${{ github.event.repository.name }}
           package-type: container
-          min-versions-to-keep: 1
+          min-versions-to-keep: ${{env.VERSIONS_TO_KEEP}}
 
   notify:
     # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md
