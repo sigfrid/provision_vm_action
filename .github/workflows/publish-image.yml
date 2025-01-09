@@ -49,6 +49,12 @@ jobs:
     # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md
     runs-on: ubuntu-24.04
 
+    needs: [build]
+
+    permissions:
+      packages: write
+
+    if: success()
     steps:
       - name: Clean up old package versions
         uses: actions/delete-package-versions@v5
