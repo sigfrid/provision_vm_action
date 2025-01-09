@@ -45,6 +45,11 @@ jobs:
           tags: |
             ghcr.io/${{  github.repository }}:${{ github.ref_name }}
 
+  cleanup:
+    # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md
+    runs-on: ubuntu-24.04
+
+    steps:
       - name: Clean up old package versions
         uses: actions/delete-package-versions@v5
         with:
