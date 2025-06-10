@@ -4,6 +4,8 @@ require 'dotenv/load'
 require "net/ssh"
 require "erb"
 
+puts File.read(ENV["SSH_KEY_PATH"])
+
 SSH = Net::SSH.start(ENV["SSH_HOST"],
                ENV["SSH_USER"],
                port: ENV["SSH_PORT"],
