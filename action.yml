@@ -1,0 +1,12 @@
+name: ""
+description: ""
+author: ""
+branding:
+  icon: filter
+  color: yellow
+runs:
+  using: composite
+  steps:
+    - run: |
+        bundle exec ruby run.rb
+      shell: bash
