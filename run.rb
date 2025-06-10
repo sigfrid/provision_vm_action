@@ -11,4 +11,4 @@ SSH = Net::SSH.start(ENV["SSH_HOST"],
                key_data: [File.read(ENV["SSH_KEY_PATH"])],
                keys_only: true)
 
-puts SSH.exec!(ERB.new(File.read("./scripts/install_fail2ban")).result)
+puts SSH.exec!(ERB.new(File.read("./scripts/00_echo")).result)
